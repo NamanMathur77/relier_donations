@@ -1,0 +1,79 @@
+{%extends "home/base.html"%}
+{%load static%}
+
+{% block content %}
+<!-- <div class="js-fullheight"> -->
+
+<!-- <div class="js-fullheight"> -->
+<div class="hero-wrap js-fullheight">
+  <div class="overlay"></div>
+  <div id="particles-js"></div>
+  <div class="container">
+    <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
+      <div class="col-md-6 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
+        <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Come Join Us
+          <strong>DONATE</strong> for ones in need</h1>
+        {% if user.is_authenticated %}
+        <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><a href="{% url 'post-create' %}"
+            class="btn btn-primary btn-outline-white px-5 py-3">Start donating {{user.username}}</a></p>
+        {% else %}
+        <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><a href="{% url 'login' %}"
+            class="btn btn-primary btn-outline-white px-5 py-3">Login Now</a></p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% if user.username == "naman" %}
+<div>
+  <div class="container">
+    {% for item in items%}
+    <article class="media">
+      <img class="rounded-circle article-img" src="{{item.donor.profile.image.url}}" alt=""
+        style="height: 65px; width: 65px; margin-right: 16px;">
+      <div class="">
+        <div class="">
+          <a class="" href="#" style="font-family: 'Kanit', sans-serif; color:#FFF"> - {{ item.donor }}</a>
+          <p class="" style="color: #000000;">{{ item.date_posted|date:"F d, Y" }}</p>
+        </div>
+        <h2 style="color: #ff6600;"><a class="article-title" href="{% url 'post-detail' item.id %}"
+            style="color: #FFF; font-family: 'Archivo Black', sans-serif;">{{ item.title }}</a></h2>
+        <p class="article-content" style="color: #000000;">{{ item.desc }}</p>
+      </div>
+    </article>
+    <hr class="style-three">
+    {% endfor%}
+  </div>
+  {% else %}
+  {% if user.is_authenticated %}
+  <!-- <div><h1 style="color: #FFF; font-family: 'Archivo Black', sans-serif;" align="center"><u>Your Pending Donations</u></h1> -->
+  {% endif %}
+          {% for item in items %}
+  {% if user == item.donor %}
+  <article class="media container">
+    <img class="rounded-circle article-img" src="{{item.donor.profile.image.url}}" alt=""
+      style="height: 65px; width: 65px; margin-right: 16px;">
+    <div class="">
+      <div class="">
+        <a class="" href="#" style="font-family: 'Kanit', sans-serif; color:#FFF"> - {{ item.donor }}</a>
+        <span class="badge badge-warning">Pending</span>
+        <p class="" style="color: #000000;">{{ item.date_posted|date:"F d, Y" }}</p>
+      </div>
+      <h2 style="color: #ff6600;"><a class="article-title" href="{% url 'post-detail' item.id %}"
+          style="color: #FFF; font-family: 'Archivo Black', sans-serif;">{{ item.title }}</a></h2>
+      <p class="article-content" style="color: #000000;">{{ item.desc }}</p>
+    </div>
+  </article>
+  <hr class="style-three container">
+  {% endif%}
+  {% endfor %}
+  </div>
+  {% endif %}
+</div>
+<!-- loader -->
+<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
+    <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+    <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" />
+  </svg></div>
+{% endblock %}

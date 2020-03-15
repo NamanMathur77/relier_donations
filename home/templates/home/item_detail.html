@@ -1,0 +1,50 @@
+{%extends "home/base.html"%}
+{%block content%}
+<div class = "content overlay">
+    <div class="hero-wrap">
+        <div class="overlay"></div>
+        <div id="particles-js"></div>
+        <div class="container">
+          <!-- <div class="row no-gutters " data-scrollax-parent="true"> -->
+            <div class="col-md-12">
+                <div class="container content-section">
+                    <div style="margin-top: 5em; height: 5em">      </div>
+
+<div style="height: 1em"></div>
+    <article class="media content-section">
+      <img class="rounded-circle article-img" src="{{object.donor.profile.image.url}}" alt="" style="height: 65px; width: 65px; margin-right: 16px;">
+            <div class="media-body">
+              <div class="article-metadata">
+                <a class="" href="#"><p style="color: #FFF"; font-family: 'Bitter'; font-size: 30>{{ object.donor }}</p></a>
+                <small class="" style="color:#FFF">{{ object.date_posted|date:"F d, Y" }}</small>
+              </div>
+              <h2 class="article-title" style="font-family:'Francois One'; color:#FFF">{{ object.title }}</h2>
+              <p class="article-content" style="font-family:'Viga'; color:#FFF">{{ object.desc }}</p>
+              <p class="article-content" style="font-family:'Viga'; color:#FFF">{{object.PhoneNo}}</p>
+              <img src="{{object.image.url}}" alt="" style="height: 450px; width:500px;">
+            </div>
+          <a href="{% url 'post-delete' item.id %}" class="btn btn-outline-danger">Delete</a>
+          {%if user.username == "naman" %}
+          <a href="{% url 'post-approve' item.id %}" class="btn btn-outline-success">Approve</a>
+          <a href="{% url 'post-deny' item.id %}" class="btn btn-outline-danger">Deny</a>
+          {%else%}
+          <div class="btn btn-outline-success">Pending Approval</div>
+          {%endif%}
+
+        </article>          
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        <script type="text/javascript"> 
+          function preventBack() { 
+              window.history.forward();  
+          } 
+            
+          setTimeout("preventBack()", 0); 
+            
+          window.onunload = function () { null }; 
+      </script> 
+  </head> 
+{% endblock%}

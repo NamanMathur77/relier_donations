@@ -1,0 +1,49 @@
+{% extends "home/base.html"%}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="hero-wrap">
+    <div class="overlay"></div>
+    <div id="particles-js"></div>
+    <div class="container">
+      <!-- <div class="row no-gutters " data-scrollax-parent="true"> -->
+        <div class="col-md-12">
+            <div class="container content-section">
+                <form action="" method="POST">
+                    
+                    {% csrf_token %}
+                    <div style="margin-top: 5em; height: 5em">      </div>
+                    {% for error in form.non_field_errors %}
+                    <div class="has-errors text-danger small">
+                        {{error}}
+                    </div>
+                    {% endfor %}
+                    {% for field in form %}
+                    <div class="has-errors text-danger small" style="margin-top: 1em;">
+                        {{field.errors}}
+                    </div>
+                    <div class="has-errors text-danger small" style="margin-top: 1em;">
+                    </div>
+                    <div style="margin:auto 0%">
+                        <div align="center">
+                        <label for="input" style="border-top: 100; color:#FFFFFF; font-size:15"><strong>{{field.label_tag}}</strong></label>
+                        {{field}}
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <div align="center">
+                        <button class="btn btn-outline-info" type="submit">Sign Up</button>
+                        <small class="text-muted" style="color:#FFFFFF">Already Have an Account? <a class="ml-2" href="#" style="color: #FFFFFF;">Sign In</a></small>
+                    </div>
+                </form>
+                <div class="margin-top pt-3">
+
+                </div>
+            </div>
+
+        </div>
+      <!-- </div> -->
+    </div>
+  </div>
+
+
+{%endblock%}

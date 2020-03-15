@@ -1,0 +1,74 @@
+{% extends "home/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="content" >
+    <div class="hero-wrap">
+        <div id="particles-js"></div>
+
+        <div class="container">
+            <!-- <div class="row no-gutters " data-scrollax-parent="true"> -->
+            <div class="col-md-12">
+                <div class="container content-section">
+                    <div style="margin-top: 5em; height: 5em"> </div>
+
+                    <div class=media>
+                        <img src="{{user.profile.image.url}}" alt="" class="img-thumbnail"
+                            style="height: 125px; width: 125px; margin-right: 20px; margin-bottom: 16px;">
+                        <div class="media-body">
+                            <h2 class="account-heading" style="color:#FFF; font-family: 'Bree Serif';">User Name :-
+                                {{user.username}}</h2><h2 class="badge badge-warning" align="right" style="color: #fff; font-size: 30px">Your Contribution Score: {{count}}</h2>
+                            <p class="" style="font-family:'Viga'; color:#FFF; font-size:20px">Name :-
+                                {{user.first_name}} {{user.last_name}}</p>
+                            <p class="" style="font-family:'Viga'; color:#FFF; font-size:20px">Address :-
+                                {{user.address}}</p>
+                            <p class="" style="font-family:'Viga'; color:#FFF; font-size:20px">{{user.email}}</p>
+                            <p class="" style="font-family:'Viga'; color:#FFF; font-size:20px">{{user.profile.bio}}</p>
+                            <p style="font-family:'Viga'; color:#FFF; font-size:40px"><u><strong>Approved
+                                        Contributions</strong></u></p>
+                            
+                            {% for block in blockchain.chain %}
+                            {% for dt in block.data %}
+                            {% if dt.sender == user.username %}
+                            <p style="font-family:'Viga'; color:#FFF; font-size:20px">Donation No.- {{block.index}}
+                                <span class="badge badge-success" align="right">Approved Donation</span></p>
+                            <p style="font-family:'Viga'; color:#FFF; font-size:20px">{{dt.title}}</p>
+                            <p style="font-family:'Viga'; color:#FFF; font-size:20px">{{dt.description}}</p>
+                            <hr class="style-three">
+                            {% endif %}
+                            {% endfor %}
+                            {% endfor %}
+
+                            <p style="font-family:'Viga'; color:#FFF; font-size:40px"><u><strong>Rejected
+                                Contributions</strong></u></p>
+                    
+                        {% for block in denyblockchain.chain %}
+                        {% for dt in block.data %}
+                        {% if dt.sender == user.username %}
+                        <p style="font-family:'Viga'; color:#FFF; font-size:20px">Donation No.- {{block.index}}
+                        <span class="badge badge-danger" align="right">Rejected Donation</span></p>
+                        <p style="font-family:'Viga'; color:#FFF; font-size:20px">{{dt.title}}</p>
+                        <p style="font-family:'Viga'; color:#FFF; font-size:20px">{{dt.description}}</p>
+                        <hr class="style-three">
+                        {% endif %}
+                        {% endfor %}
+                        {% endfor %}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+                    <form action="" method="POST" enctype="multipart/form-data" class="container">
+                        {% csrf_token %}
+                        <fieldset calss="form-group">
+                            <legend class="border-bottom mb-4">Profile Info</legend>
+                            {{u_form|crispy}}
+                            {{p_form|crispy}}
+                        </fieldset>
+                        <div class="form-group">
+                            <button class="btn btn-outline-info" type="submit">Update</button>
+                        </div>
+                    </form>
+{%endblock%}

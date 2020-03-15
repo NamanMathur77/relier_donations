@@ -1,0 +1,57 @@
+{%extends "home/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="hero-wrap">
+    <div class="overlay"></div>
+    <div id="particles-js"></div>
+    <div class="container">
+      <!-- <div class="row no-gutters " data-scrollax-parent="true"> -->
+        <div class="col-md-12">
+            <div class="container content-section">
+
+<!-- <div class = "content-section"> -->
+    <div style="margin-top: 5em; height: 5em">      </div>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4" style="color:#FFFFFF">Login</legend>
+            <!-- {{form|crispy}} -->
+            {% for error in form.non_field_errors %}
+            <div class="has-errors text-danger small">
+                {{error}}
+            </div>
+            {% endfor %}
+
+            {% for field in form %}
+            <div class="has-errors text-danger small" style="margin-top: 1em;">
+                {{field.errors}}
+            </div>
+            <div class="has-errors text-danger small" style="margin-top: 1em;">
+            </div>
+            <div style="margin:auto 0%">
+                <div align="center">
+                <label for="input" style="border-top: 100; color:#FFFFFF; font-size:15"><strong>{{field.label_tag}}</strong></label>
+                {{field}}
+                </div>
+            </div>
+
+            {%endfor%}
+            <div align="center">
+            <button class="btn btn-outline-info" type="submit">Login</button>
+            </div>
+            <div class="border-top pt-3">
+                <p class="" style="color: #FFFFFF;">Dont Have an Account <a class="ml-2" href="{% url 'register' %}" style="color: blue;">Sign up Now</a></p>
+            </div>        
+        </fieldset>
+        <div class="form-group">
+        </div>
+    </form>
+
+</div>
+</div>
+
+</div>
+<!-- </div> -->
+</div>
+
+{%endblock%}
