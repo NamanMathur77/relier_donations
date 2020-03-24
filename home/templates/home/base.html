@@ -8,46 +8,74 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,700,800" rel="stylesheet">
-  <link
-    href="https://fonts.googleapis.com/css?family=Archivo+Black|Bitter|Bree+Serif|Francois+One|Kanit:300|Viga&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Bitter|Bree+Serif|Francois+One|Heebo:900|Viga&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'home/css/main.css' %}">
 
 </head>
 
-<body style="background: #A90093;background: -moz-linear-gradient(45deg, #A90093 0%, #3D78B0 100%);
-background: -webkit-gradient(left bottom, right top, color-stop(0%, #A90093), color-stop(100%,#3D78B0));
-background: -webkit-linear-gradient(45deg, #A90093 0%, #3D78B0 100%);
-background: -o-linear-gradient(45deg, #A90093 0%, #3D78B0 100%);
-background: -ms-linear-gradient(45deg, #A90093 0%, #3D78B0 100%);
-background: linear-gradient(45deg, #A90093 0%, #3D78B0 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#448ef6', endColorstr='#af05a9', GradientType=1 );">
-
-  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-    <div class="container">
+<body style="background-image: linear-gradient(to bottom right, red, yellow);  background-size: cover;   background-repeat: no-repeat; height: 100%">
+  <div id="particles-js" style="background-image: linear-gradient(to bottom right, red, yellow);  background-size: cover;   background-repeat: no-repeat; height: 100%">
+  </div>
+  <!-- <body style="background: #A90093;background: -moz-linear-gradient(45deg, #A90093 0%, #3D78B0 100%);
+  background: -webkit-gradient(left bottom, right top, color-stop(0%, #A90093), color-stop(100%,#3D78B0));
+  background: -webkit-linear-gradient(45deg, #A90093 0%, #3D78B0 100%);
+  background: -o-linear-gradient(45deg, #A90093 0%, #3D78B0 100%);
+  background: -ms-linear-gradient(45deg, #A90093 0%, #3D78B0 100%);
+  background: linear-gradient(45deg, #A90093 0%, #3D78B0 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#448ef6', endColorstr='#af05a9', GradientType=1 ); height: 100%"> -->
+  <!-- <nav class="navbar navbar-light bg-light">
       <a class="navbar-brand" href="{% url 'home'%}">Relier .</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
-        aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="oi oi-menu"></span> Menu
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-toggle="collapse">
+        <span class=navbar-toggler-icon></span>
       </button>
 
-      <div class="collapse navbar-collapse" id="ftco-nav">
-        <ul class="navbar-nav ml-auto">
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
           <li class="nav-item active"><a href="{% url 'home' %}" class="nav-link">Home</a></li>
           <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
           {% if user.is_authenticated %}
-          <li class="nav-item cta"><a href="{% url 'logout' %}" class="nav-link"><span>Logout</span></a></li>
-          <li class="nav-item cta"><a href="{% url 'profile' %}" class="nav-link"><span>Profile</span></a></li>
+          <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link"><span>Logout</span></a></li>
+          <li class="nav-item"><a href="{% url 'profile' %}" class="nav-link"><span>Profile</span></a></li>
           {%else%}
-          <li class="nav-item cta"><a href="{% url 'login' %}" class="nav-link"><span>Login</span></a></li>
-          <li class="nav-item cta"><a href="{% url 'register' %}" class="nav-link"><span>Register</span></a></li>
+          <li class="nav-item"><a href="{% url 'login' %}" class="nav-link"><span>Login</span></a></li>
+          <li class="nav-item"><a href="{% url 'register' %}" class="nav-link"><span>Register</span></a></li>
           {% endif %}
         </ul>
       </div>
-    </div>
-  </nav> <!-- END nav -->
+  </nav> END nav -->
+
+
+<nav class="navbar fixed-top navbar-expand-lg navbar-light container" style="background-color: transparent;">
+  <a class="navbar-brand" href="{% url 'home'%}" style="color: #FFF; font-family: 'Heebo', sans-serif;"><h2>Relier.</h2></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+    <ul class="nav navbar-nav">
+      <li class="nav-item active pull-right">
+        <a href="{% url 'home' %}" class="nav-link" style="color: #FFF; font-family: 'Heebo', sans-serif;">Home</a>
+      </li>
+      <li class="nav-item">
+        <a href="about.html" class="nav-link" style="color: #FFF; font-family: 'Heebo', sans-serif;">About</a>
+      </li>
+      {% if user.is_authenticated %}
+      <li class="nav-item btn-nav"><a href="{% url 'logout' %}" class="nav-link"><span style="color: #FFF; font-family: 'Heebo', sans-serif;">Logout</span></a></li>
+      <li class="nav-item"><a href="{% url 'profile' %}" class="nav-link"><span style="color: #FFF; font-family: 'Heebo', sans-serif;">Profile</span></a></li>
+      {%else%}
+      <li class="nav-item"><a href="{% url 'login' %}" class="nav-link"><span style="color: #FFF; font-family: 'Heebo', sans-serif;">Login</span></a></li>
+      <li class="nav-item"><a href="{% url 'register' %}" class="nav-link"><span style="color: #FFF; font-family: 'Heebo', sans-serif;">Register</span></a></li>
+      {% endif %}    </ul>
+  </div>
+</nav>
+
   {% block content %}{% endblock %}
-
-
+<script src="{% static 'home/js/particles.js' %}"></script>
+<script type="text/javascript">
+  particlesJS.load('particles-js', '{% static "home/json/particles.json" %}', function() {
+      console.log('callback - particles.js config loaded');
+    });
+</script>
 </body>
 
 </html>
