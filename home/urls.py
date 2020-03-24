@@ -8,6 +8,8 @@ urlpatterns=[
     path('post/new/',PostCreateView.as_view(),name='post-create'),
     path('post/<int:pk>/delete',PostDeleteView.as_view(),name='post-delete'),
     path('post/<int:pk>/approve',views.approve, name='post-approve'),
-    path('post/<int:pk>/deny',views.deny, name='post-deny')
+    path('post/<int:pk>/deny',views.deny, name='post-deny'),
+    path('user/<str:username>', views.userDetail, name='user-detail'),
+    path('about/',views.about,name="about-us"),
 
 ]

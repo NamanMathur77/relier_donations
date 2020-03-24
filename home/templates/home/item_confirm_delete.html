@@ -1,16 +1,30 @@
 {%extends "home/base.html"%}
 {%block content%}
-<div class="content-section">
-    <form action="" method="POST">
-        {% csrf_token %}
-        <fieldset calss="form-group">
-            <legend class="border-bottom mb-4">Delete Donation</legend>
-            <h2>Are you sure you want to delete the donation "{{object.title}}"</h2>
-        </fieldset>
-        <div class="form-group">
-            <button class="btn btn-outline-danger" type="submit">Yes Delete</button>
-            <a class="btn btn-outline-danger" href="{% url 'post-detail' object.id %}" >Cancel</a>
-        </div>
-    </form>
+<div class="hero-wrap js-fullheight">
+    <div class="overlay"></div>
+    <div id="particles-js"></div>
+    <div class="container">
+        <div class="col-md-12">
+            <div class="container content-section">
+                <div style="margin-top: 5em; height: 5em">      </div>
+
+        <form action="" method="POST">
+            {% csrf_token %}
+            <fieldset classs="form-group">
+                <legend class="border-bottom mb-4" style="color: #fff;">Delete Donation</legend>
+                <h2 style="color:#FFF; font-family: 'Bree Serif';">Are you sure you want to delete the donation "{{object.title}}"</h2>
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-danger" type="submit">Yes Delete</button>
+                <a class="btn btn-outline-danger" href="{% url 'post-detail' object.id %}" >Cancel</a>
+            </div>
+        </form>
+    </div>
+    
 </div>
+</div>
+</div>
+</div>
+
+
 {% endblock %}

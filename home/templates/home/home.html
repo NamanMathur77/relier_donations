@@ -5,7 +5,7 @@
 <!-- <div class="js-fullheight"> -->
 
 <!-- <div class="js-fullheight"> -->
-<div id="overlay">
+  <div class="overlay" style="margin-top: 10em;">
   <div class="container">
     <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
       <div class="col-md-6 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
@@ -20,9 +20,8 @@
         {% endif %}
       </div>
     </div>
-  </div>
 </div>
-
+  </div>
 {% if user.username == "naman" %}
 <div>
   <div class="container" id="overlay">
@@ -32,7 +31,7 @@
         style="height: 65px; width: 65px; margin-right: 16px;">
       <div class="">
         <div class="">
-          <a class="" href="#" style="font-family: 'Kanit', sans-serif; color:#FFF"> - {{ item.donor }}</a>
+          <a class="" href="{% url 'user-detail' item.donor %}" style="font-family: 'Kanit', sans-serif; color:#FFF"> - {{ item.donor }}</a>
           <p class="" style="color: #000000;">{{ item.date_posted|date:"F d, Y" }}</p>
         </div>
         <h2 style="color: #ff6600;"><a class="article-title" href="{% url 'post-detail' item.id %}"

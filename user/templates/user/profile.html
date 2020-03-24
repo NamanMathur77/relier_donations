@@ -21,6 +21,8 @@
                                 {{user.first_name}} {{user.last_name}}</p>
                             <p class="" style="font-family:'Viga'; color:#FFF; font-size:20px">Address :-
                                 {{user.address}}</p>
+                            <p class="" style="font-family:'Viga'; color:#FFF; font-size:20px">Address :-
+                                {{user.recipient}}</p>
                             <p class="" style="font-family:'Viga'; color:#FFF; font-size:20px">{{user.email}}</p>
                             <p class="" style="font-family:'Viga'; color:#FFF; font-size:20px">{{user.profile.bio}}</p>
                             <p style="font-family:'Viga'; color:#FFF; font-size:40px"><u><strong>Approved
@@ -31,6 +33,7 @@
                             {% if dt.sender == user.username %}
                             <p style="font-family:'Viga'; color:#FFF; font-size:20px">Donation No.- {{block.index}}
                                 <span class="badge badge-success" align="right">Approved Donation</span></p>
+                            <p>{{dt.recipient}}</p>
                             <p style="font-family:'Viga'; color:#FFF; font-size:20px">{{dt.title}}</p>
                             <p style="font-family:'Viga'; color:#FFF; font-size:20px">{{dt.description}}</p>
                             <hr class="style-three">

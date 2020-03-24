@@ -202,12 +202,12 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         item=self.get_object()
         print("In the delte")
         if(self.request.user==item.donor or self.request.user.username=="naman"):
-            print("In the truth")
             return True
         return False
 
 def approve(request, pk):
     item=Item.objects.get(pk=pk)
+    rec=request.POST['reciever']
     name=item.title
     if(request.user.username=="naman"):
         blockchain = loadall('blck.pkl')
@@ -217,7 +217,7 @@ def approve(request, pk):
             proof_no = blockchain.proof_of_work(last_proof_no)
             blockchain.new_data(
                 sender = item.donor.username,
-                recipient = 'naman',
+                recipient = rec,
                 title = item.title,
                 description = item.desc,
                 phone = item.PhoneNo
@@ -254,6 +254,35 @@ def deny(request, pk):
     pri=str(pk)
     redirectpath="/post/"+pri+"/delete"
     return HttpResponseRedirect(redirectpath)
+
+def userDetail(request, username):
+    blockchain=loadall('blck.pkl')
+    denyblockchain=loadall('denyblck.pkl')
+    count=0
+    red=0
+    for block in blockchain.chain:
+        dt=block.data
+        for i in dt:
+            if(type(i['sender'])==str and i['sender']==username):
+                count+=1
+    for block in denyblockchain.chain:
+        dt=block.data
+        for i in dt:
+            if(type(i['sender'])==str and i['sender']==username):
+                red+=1
+    count=count-red
+    context={
+        'username':username,
+        'blockchain':blockchain,
+        'denyblockchain':denyblockchain,
+        'items': Item.objects.all(),
+        'count':count
+    }
+    return render(request, 'home/userdetail.html', context)
+
+def about(request):
+    return render(request, 'home/about.html')
+
 # class approve(View):
 #     model=Item
 #     def __init__(self, kwargs):
