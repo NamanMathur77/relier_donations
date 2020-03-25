@@ -1,66 +1,39 @@
 {%extends "home/base.html"%}
+{%load static%}
 {%block content%}
-<div class = "content overlay">
-    <div class="hero-wrap">
-        <div class="overlay"></div>
-        <div id="particles-js"></div>
-        <div class="container">
-          <!-- <div class="row no-gutters " data-scrollax-parent="true"> -->
-            <div class="col-md-12">
-                <div class="container content-section">
-                    <div style="margin-top: 5em; height: 5em">      </div>
-
-<div style="height: 1em"></div>
-    <article class="media content-section">
-      <img class="rounded-circle article-img" src="{{object.donor.profile.image.url}}" alt="" style="height: 65px; width: 65px; margin-right: 16px;">
-            <div class="media-body">
-              <div class="article-metadata">
-                <a class="" href="{% url 'user-detail' item.donor %}"><p style="color: #FFF"; font-family: 'Bitter'; font-size: 30>{{ object.donor }}</p></a>
-                <small class="" style="color:#FFF">{{ object.date_posted|date:"F d, Y" }}</small>
-              </div>
-              <h2 class="article-title" style="font-family:'Francois One'; color:#FFF">{{ object.title }}</h2>
-              <p class="article-content" style="font-family:'Viga'; color:#FFF">{{ object.desc }}</p>
-              <p class="article-content" style="font-family:'Viga'; color:#FFF">{{object.PhoneNo}}</p>
-              <img src="{{object.image.url}}" alt="" style="height: 450px; width:500px;">
-            </div>
-          <hr>
-        </article>          
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>
-        <div style="height:3em"></div>
-        <div class="container" style="text-align: center;" id="overlay">
-          {% if user.username == "naman" %}
-          <form action="{% url 'post-approve' item.id %}" method="post">
-            {%csrf_token%}
-            <fieldset class="form-group">
-              Enter the final Reciever : <input type="text" name="reciever"><br>
-            </fieldset>
-            <input class="btn btn-success" type="submit" value="Approve">
-          </form>
-          {% endif %}
-          {%if user.username == "naman" %}
-          <h2 style="color:#FFF; font-family: 'Bree Serif';">or</h2>
-          <div style="text-align: center;">
-            <a href="{% url 'post-deny' item.id %}" class="btn btn-danger">Deny</a>
-          </div>
-          {%else%}
-          <div style="text-align: center;">
-          <a href="{% url 'post-delete' item.id %}" class="btn btn-danger">Delete</a>
-          </div>
-          {%endif%}
-        </div>
+<div style="height: 7em;"></div>
+<div class="media container" id="overlay">
+    <div class="media-body">
+        <h2 class="account-heading" style="color:#FFF; font-family: 'Bree Serif';">User Name :-
+            {{username}}</h2><h2 class="badge badge-warning" align="right" style="color: #fff; font-size: 30px">Contribution Score: {{count}}</h2>
+        <p style="font-family:'Viga'; color:#FFF; font-size:40px"><u><strong>Approved
+                    Contributions</strong></u></p>
         
-        <script type="text/javascript"> 
-          function preventBack() { 
-              window.history.forward();  
-          } 
-            
-          setTimeout("preventBack()", 0); 
-            
-          window.onunload = function () { null }; 
-      </script> 
-  </head> 
-{% endblock%}
+        {% for block in blockchain.chain %}
+        {% for dt in block.data %}
+        {% if dt.sender == user.username %}
+        <p style="font-family:'Viga'; color:#FFF; font-size:20px">Donation No.- {{block.index}}
+            <span class="badge badge-success" align="right">Approved Donation</span></p>
+        <p style="font-family:'Viga'; color:#FFF; font-size:20px">{{dt.title}}</p>
+        <p style="font-family:'Viga'; color:#FFF; font-size:20px">{{dt.description}}</p>
+        <hr class="style-three">
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
+        <p style="font-family:'Viga'; color:#FFF; font-size:40px"><u><strong>Rejected
+            Contributions</strong></u></p>
+
+    {% for block in denyblockchain.chain %}
+    {% for dt in block.data %}
+    {% if dt.sender == user.username %}
+    <p style="font-family:'Viga'; color:#FFF; font-size:20px">Donation No.- {{block.index}}
+    <span class="badge badge-danger" align="right">Rejected Donation</span></p>
+    <p style="font-family:'Viga'; color:#FFF; font-size:20px">{{dt.title}}</p>
+    <p style="font-family:'Viga'; color:#FFF; font-size:20px">{{dt.description}}</p>
+    <hr class="style-three">
+    {% endif %}
+    {% endfor %}
+    {% endfor %}
+<img class="rounded-circle article-img" src="{{username.profile.image.url}}" alt=""
+style="height: 65px; width: 65px; margin-right: 16px;">
+{% endblock %}
