@@ -9,14 +9,14 @@
   <div class="container">
     <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
       <div class="col-md-6 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
-        <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Come Join Us
+        <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }" style="font-family: 'Ultra', serif; color: #FFF">Come Join Us
           <strong>DONATE</strong> for ones in need</h1>
         {% if user.is_authenticated %}
         <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><a href="{% url 'post-create' %}"
-            class="btn btn-primary btn-outline-white px-5 py-3">Start donating {{user.username}}</a></p>
+            class="btn btn-primary btn-lg">Start donating {{user.username}}</a></p>
         {% else %}
         <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><a href="{% url 'login' %}"
-            class="btn btn-primary btn-outline-white px-5 py-3">Login Now</a></p>
+            class="btn btn-primary btn-lg">Login Now</a></p>
         {% endif %}
       </div>
     </div>
@@ -46,6 +46,7 @@
   {% if user.is_authenticated %}
   <!-- <div><h1 style="color: #FFF; font-family: 'Archivo Black', sans-serif;" align="center"><u>Your Pending Donations</u></h1> -->
   {% endif %}
+  <div id="overlay">
           {% for item in items %}
   {% if user == item.donor %}
   <article class="media container">
@@ -54,7 +55,7 @@
     <div class="">
       <div class="">
         <a class="" href="#" style="font-family: 'Kanit', sans-serif; color:#FFF"> - {{ item.donor }}</a>
-        <span class="badge badge-warning">Pending</span>
+        <span class="badge badge-warning">Pending Donation</span>
         <p class="" style="color: #000000;">{{ item.date_posted|date:"F d, Y" }}</p>
       </div>
       <h2 style="color: #ff6600;"><a class="article-title" href="{% url 'post-detail' item.id %}"
@@ -65,6 +66,7 @@
   <hr class="style-three container">
   {% endif%}
   {% endfor %}
+  </div>
   </div>
   {% endif %}
 </div>
