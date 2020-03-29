@@ -11,7 +11,7 @@
         "value": "#ffffff"
       },
       "shape": {
-        "type": "",
+        "type": "star",
         "stroke": {
           "width": 0,
           "color": "#000000"
@@ -36,7 +36,7 @@
         }
       },
       "size": {
-        "value": 5,
+        "value": 3,
         "random": true,
         "anim": {
           "enable": false,

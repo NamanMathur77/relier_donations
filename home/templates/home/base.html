@@ -8,14 +8,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,700,800" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Bitter|Bree+Serif|Francois+One|Heebo:900|Merienda+One|Ultra|Viga&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Bitter|Bree+Serif|Courgette|Francois+One|Heebo:900|Merienda+One|Ultra|Viga&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'home/css/main.css' %}">
 
 </head>
 
 <body style="background-image: linear-gradient(to bottom right, red, yellow);  background-size: cover;   background-repeat: no-repeat; height: 100%">
-  <div id="particles-js" style="background-image: linear-gradient(to bottom right, red, yellow);  background-size: cover;   background-repeat: no-repeat; height: 100%">
+  <div id="particles-js" style="background-image: linear-gradient(to bottom right, #FF8B95, #22203E);  background-size: cover;   background-repeat: no-repeat; height: 100%">
   </div>
 
 <nav class="navbar fixed-top navbar-expand-lg navbar-light container" style="background-color: transparent;">
@@ -42,6 +42,13 @@
 </nav>
 
   {% block content %}{% endblock %}
+
+<footer class="page-footer font-samll blue pt-4" id="overlay" style="background:transparent">
+  <div class="container-fluid text-center">
+    <p class="text-muted" style="color: #FFF; font-family: 'Courgette', cursive; ">A Naman Mathur and Mudit Tyagi Production</p>
+
+  </div>
+</footer>
 <script src="{% static 'home/js/particles.js' %}"></script>
 <script type="text/javascript">
   particlesJS.load('particles-js', '{% static "home/json/particles.json" %}', function() {
