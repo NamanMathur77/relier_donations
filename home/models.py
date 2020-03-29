@@ -15,16 +15,16 @@ class Item(models.Model):
     donor = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='item_pics', blank=False)
 
-    def __str__(self):
-        return self.title
+    # def __str__(self):
+    #     return self.title
     
-    def save(self):
-        super().save()
-        img=Image.open(self.image.path)
-        if img.height > 400 or img.width > 400:
-            output_size = (400, 400)
-            img.thumbnail(output_size)
-            img.save(self.image.path)
+    # def save(self):
+    #     super().save()
+    #     img=Image.open(self.image.path)
+    #     if img.height > 400 or img.width > 400:
+    #         output_size = (400, 400)
+    #         img.thumbnail(output_size)
+    #         img.save(self.image.path)
 
 
 
