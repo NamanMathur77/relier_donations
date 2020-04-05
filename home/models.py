@@ -14,9 +14,10 @@ class Item(models.Model):
     PhoneNo = models.CharField(verbose_name="Phone number", max_length=10,validators=[int_list_validator(sep=''),MinLengthValidator(10),], default='1234567890')
     donor = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='item_pics', blank=False)
+    status = models.CharField(max_length = 100)
 
-    # def __str__(self):
-    #     return self.title
+    def __str__(self):
+        return self.title
     
     # def save(self):
     #     super().save()

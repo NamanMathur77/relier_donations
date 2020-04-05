@@ -26,12 +26,18 @@
 <div>
   <div class="container" id="overlay">
     {% for item in items%}
+    {% if item.status == 'pending' %}
     <article class="media">
       <img class="rounded-circle article-img" src="{{item.donor.profile.image.url}}" alt=""
         style="height: 65px; width: 65px; margin-right: 16px;">
       <div class="">
         <div class="">
           <a class="" href="{% url 'user-detail' item.donor %}" style="font-family: 'Kanit', sans-serif; color:#FFF"> - {{ item.donor }}</a>
+          {% if item.status == "pending" %}
+          <span class="badge badge-warning">{{item.status}}</span>
+          {% elif item.status == "approved" %}
+          <span class="badge badge-success">{{item.status}}</span>
+          {% endif %}
           <p class="" style="color: #000000;">{{ item.date_posted|date:"F d, Y" }}</p>
         </div>
         <h2 style="color: #ff6600;"><a class="article-title" href="{% url 'post-detail' item.id %}"
@@ -40,6 +46,7 @@
       </div>
     </article>
     <hr class="style-three">
+    {% endif %}
     {% endfor%}
   </div>
   {% else %}
@@ -55,7 +62,11 @@
     <div class="">
       <div class="">
         <a class="" href="#" style="font-family: 'Kanit', sans-serif; color:#FFF"> - {{ item.donor }}</a>
-        <span class="badge badge-warning">Pending Donation</span>
+        {% if item.status == "pending" %}
+        <span class="badge badge-warning">{{item.status}}</span>
+        {% elif item.status == "approved" %}
+        <span class="badge badge-success">{{item.status}}</span>
+        {% endif %}
         <p class="" style="color: #000000;">{{ item.date_posted|date:"F d, Y" }}</p>
       </div>
       <h2 style="color: #ff6600;"><a class="article-title" href="{% url 'post-detail' item.id %}"

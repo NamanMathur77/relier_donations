@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Item
-from django.views.generic import DetailView,ListView,CreateView, DeleteView
+from django.views.generic import DetailView,ListView,CreateView, DeleteView, UpdateView
 import hashlib
 import time
 import pickle
@@ -153,6 +153,19 @@ def home(request):
         'items': Item.objects.all()
     }
     return render(request, 'home/home.html', context)
+
+class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin,UpdateView):
+    model = Item
+    fields = ['status']
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+    
+    def test_func(self):
+        post= self.get_object()
+        if self.request.user.username=='naman':
+            return True
+        return False
 
 class PostListView(ListView):
     model=Item
