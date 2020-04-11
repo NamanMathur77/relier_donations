@@ -251,6 +251,8 @@ def approve(request, pk):
     
 def deny(request, pk):
     item=Item.objects.get(pk=pk)
+    item.status = 'rejected'
+    item.save()
     name=item.title
     if(request.user.username=="naman"):
         blockchain = loadall('blck.pkl')
@@ -264,6 +266,7 @@ def deny(request, pk):
                 title = item.title,
                 description = item.desc,
                 # phone = item.PhoneNo
+                photo = item.image
             )
             last_hash = last_block.calculate_hash
             block = blockchain.construct_block(proof_no, last_hash)

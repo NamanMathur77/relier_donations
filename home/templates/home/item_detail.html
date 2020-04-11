@@ -41,7 +41,10 @@
           {%if user.username == "naman" %}
           <h2 style="color:#FFF; font-family: 'Bree Serif';">or</h2>
           <div style="text-align: center;">
-            <a href="{% url 'post-deny' item.id %}" class="btn btn-danger">Reject</a>
+            <form action="{% url 'post-deny' item.id %}" method="post">
+              {%csrf_token%}
+              <input class="btn btn-danger" type="submit" value="Reject">
+            </form>
           </div>
           {%else%}
           <div style="text-align: center;">

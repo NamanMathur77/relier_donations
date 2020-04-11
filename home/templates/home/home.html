@@ -66,6 +66,8 @@
         <span class="badge badge-warning">{{item.status}}</span>
         {% elif item.status == "approved" %}
         <span class="badge badge-success">{{item.status}}</span>
+        {% elif item.status == "rejected" %}
+        <span class="badge badge-danger">{{item.status}}</span>
         {% endif %}
         <p class="" style="color: #000000;">{{ item.date_posted|date:"F d, Y" }}</p>
       </div>
