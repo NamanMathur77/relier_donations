@@ -1,0 +1,33 @@
+{%extends "home/base.html"%}
+{%load static%}
+
+{% block content %}
+<div style="height: 7em;"></div>
+<div class="media container" id="overlay">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Sender</th>
+                <th scope="col">Title</th>
+                <th scope="col">Photo_url</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for block in blockchain.chain reversed%}
+            <tr>
+                {% for data in block.data %}
+                <th scope="row">{{block.index}}</th>
+                <td>{{data.sender}}</td>
+                <td>{{data.title}}</td>
+                <td>{{data.photo}}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+
+{% endblock %}

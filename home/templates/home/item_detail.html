@@ -35,16 +35,13 @@
           {% if user.username == "naman" %}
           <form action="{% url 'post-approve' item.id %}" method="post">
             {%csrf_token%}
-            <fieldset class="form-group">
-              Enter the final Reciever : <input type="text" name="reciever"><br>
-            </fieldset>
             <input class="btn btn-success" type="submit" value="Approve">
           </form>
           {% endif %}
           {%if user.username == "naman" %}
           <h2 style="color:#FFF; font-family: 'Bree Serif';">or</h2>
           <div style="text-align: center;">
-            <a href="{% url 'post-deny' item.id %}" class="btn btn-danger">Deny</a>
+            <a href="{% url 'post-deny' item.id %}" class="btn btn-danger">Reject</a>
           </div>
           {%else%}
           <div style="text-align: center;">

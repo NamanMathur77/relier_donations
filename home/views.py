@@ -1,7 +1,9 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Item
+from django.contrib.auth.decorators import login_required
 from django.views.generic import DetailView,ListView,CreateView, DeleteView, UpdateView
 import hashlib
 import time
@@ -70,13 +72,13 @@ class BlockChain:
 
         return True
 
-    def new_data(self, sender, recipient, title, description, phone):
+    def new_data(self, sender, recipient, title, description, photo):
         self.current_data.append({
             'sender': sender,
             'recipient': recipient,
             'title': title,
             'description': description,
-            'phone': phone
+            'photo': photo
         })
         return True
 
@@ -220,7 +222,9 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 def approve(request, pk):
     item=Item.objects.get(pk=pk)
-    rec=request.POST['reciever']
+    item.status = 'approved'
+    item.save()
+    rec="naman"
     name=item.title
     if(request.user.username=="naman"):
         blockchain = loadall('blck.pkl')
@@ -233,7 +237,8 @@ def approve(request, pk):
                 recipient = rec,
                 title = item.title,
                 description = item.desc,
-                phone = item.PhoneNo
+                # phone = item.PhoneNo
+                photo = item.image
             )
             last_hash = last_block.calculate_hash
             block = blockchain.construct_block(proof_no, last_hash)
@@ -258,7 +263,7 @@ def deny(request, pk):
                 recipient = 'naman',
                 title = item.title,
                 description = item.desc,
-                phone = item.PhoneNo
+                # phone = item.PhoneNo
             )
             last_hash = last_block.calculate_hash
             block = blockchain.construct_block(proof_no, last_hash)
@@ -295,6 +300,14 @@ def userDetail(request, username):
 
 def about(request):
     return render(request, 'home/about.html')
+
+@login_required
+def get_all_donations(request):
+    blockchain=loadall('blck.pkl')
+    context = {
+        'blockchain': blockchain
+    }
+    return render(request, 'home/all_donations.html', context)
 
 # class approve(View):
 #     model=Item

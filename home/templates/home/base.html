@@ -32,6 +32,7 @@
         <a href="{% url 'about-us' %}" class="nav-link" style="color: #FFF; font-family: 'Heebo', sans-serif;">About</a>
       </li>
       {% if user.is_authenticated %}
+      <li class="nav-item btn-nav"><a href="{% url 'all-donations' %}" class="nav-link"><span style="color:#FFF; font-family: 'Heebo', sans-serif;">Donations</span></a></li>
       <li class="nav-item btn-nav"><a href="{% url 'logout' %}" class="nav-link"><span style="color: #FFF; font-family: 'Heebo', sans-serif;">Logout</span></a></li>
       <li class="nav-item"><a href="{% url 'profile' %}" class="nav-link"><span style="color: #FFF; font-family: 'Heebo', sans-serif;">Profile</span></a></li>
       {%else%}
