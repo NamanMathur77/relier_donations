@@ -220,6 +220,15 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
             return True
         return False
 
+def pickup(request, pk):
+    item=Item.objects.get(pk=pk)
+    item.status = 'arranging pickup'
+    item.save()
+    pri=str(pk)
+    redirectpath="/post/"+pri
+    return HttpResponseRedirect(redirectpath)
+
+
 def approve(request, pk):
     item=Item.objects.get(pk=pk)
     item.status = 'approved'
@@ -245,7 +254,7 @@ def approve(request, pk):
             print(blockchain.chain)
             pickle.dump(blockchain, output, pickle.HIGHEST_PROTOCOL)
     pri=str(pk)
-    redirectpath="/post/"+pri+"/delete"
+    redirectpath="/"
     return HttpResponseRedirect(redirectpath)
     
     

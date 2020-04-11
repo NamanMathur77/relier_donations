@@ -32,25 +32,40 @@
         </div>
         <div style="height:3em"></div>
         <div class="container" style="text-align: center;" id="overlay">
-          {% if user.username == "naman" %}
+          <div class="row">
+          {% if user.username == "naman" and item.status == "pending" %}
+          <div class="col">
+          <form action="{% url 'post-pickup' item.id %}" method="post">
+            {%csrf_token%}
+            <input class="btn btn-primary" type="submit" value="Approve and Pickup">
+          </form>
+          </div>
+          {% endif %}
+
+          {% if user.username == "naman" and item.status == "arranging pickup" %}
+          <div class="col">
           <form action="{% url 'post-approve' item.id %}" method="post">
             {%csrf_token%}
-            <input class="btn btn-success" type="submit" value="Approve">
+            <input class="btn btn-success" type="submit" value="Mine and finish">
           </form>
+          </div>
           {% endif %}
+
           {%if user.username == "naman" %}
-          <h2 style="color:#FFF; font-family: 'Bree Serif';">or</h2>
+          <div class="col">
           <div style="text-align: center;">
             <form action="{% url 'post-deny' item.id %}" method="post">
               {%csrf_token%}
               <input class="btn btn-danger" type="submit" value="Reject">
             </form>
           </div>
+          </div>
           {%else%}
           <div style="text-align: center;">
           <a href="{% url 'post-delete' item.id %}" class="btn btn-danger">Delete</a>
           </div>
           {%endif%}
+        </div>
         </div>
         
         <script type="text/javascript"> 

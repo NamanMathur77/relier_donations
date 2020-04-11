@@ -3,14 +3,16 @@
 
 {% block content %}
 <div style="height: 7em;"></div>
-<div class="media container" id="overlay">
+<div class="" id="overlay">
+    <h2 style="font-family: 'Ultra', serif; color:#FFF">All donations accepted by us</h2>
+    <br>
     <table class="table">
         <thead>
             <tr>
                 <th scope="col">#</th>
+                <th scope="col">Txn Hash</th>
                 <th scope="col">Sender</th>
                 <th scope="col">Title</th>
-                <th scope="col">Photo_url</th>
                 <th scope="col">Proof Number</th>
             </tr>
         </thead>
@@ -19,9 +21,9 @@
             <tr>
                 {% for data in block.data %}
                 <th scope="row">{{block.index}}</th>
+                <td scope="row">{{block.prev_hash}}</th>
                 <td>{{data.sender}}</td>
                 <td>{{data.title}}</td>
-                <td>{{data.photo}}</td>
                 <td>{{block.proof_no}}</td>
                 {% endfor %}
             </tr>
