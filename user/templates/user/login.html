@@ -38,9 +38,12 @@
             {%endfor%}
             <div align="center">
             <button class="btn btn-outline-info" type="submit">Login</button>
+            <p class="" style="color: #FFFFFF;">Forgot your password ?<a class="ml-2" href="{% url 'password_reset' %}" style="color: blue;">Reset password</a></p>
+
             </div>
             <div class="border-top pt-3">
                 <p class="" style="color: #FFFFFF;">Dont Have an Account <a class="ml-2" href="{% url 'register' %}" style="color: blue;">Sign up Now</a></p>
+                
             </div>        
         </fieldset>
         <div class="form-group">

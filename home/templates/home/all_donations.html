@@ -11,6 +11,7 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Txn Hash</th>
+                <th scope="col">Time</th>
                 <th scope="col">Sender</th>
                 <th scope="col">Title</th>
                 <th scope="col">Proof Number</th>
@@ -22,6 +23,7 @@
                 {% for data in block.data %}
                 <th scope="row">{{block.index}}</th>
                 <td scope="row">{{block.prev_hash}}</th>
+                <td scope="row">{{block.timestamp}}</td>
                 <td>{{data.sender}}</td>
                 <td>{{data.title}}</td>
                 <td>{{block.proof_no}}</td>
